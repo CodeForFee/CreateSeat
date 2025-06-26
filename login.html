@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔐 Login - Barcode Scanner</title>
+    <script src="auth.js"></script>
+    <style>
+      /* Đã rút gọn và gom nhóm CSS */
+      :root {
+        --primary-color: #2563eb;
+        --primary-hover: #1d4ed8;
+        --surface-color: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --border-color: #e2e8f0;
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1rem;
+        margin: 0;
+      }
+
+      .card {
+        background: var(--surface-color);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        width: 100%;
+        max-width: 400px;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--primary-color);
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .btn:disabled {
+        background: var(--primary-hover);
+        opacity: 0.7;
+      }
+
+      .alert {
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+
+      .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+      }
+      .alert-error {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>🔐 Login</h2>
+      <div id="alertContainer"></div>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" id="email" required />
+        <input type="text" placeholder="Sub ID" id="sub" required />
+        <input type="text" placeholder="Full Name" id="name" required />
+        <button type="submit" class="btn" id="loginBtn">Đăng nhập</button>
+      </form>
+    </div>
+
+    <script>
+      function showAlert(message, type = "error") {
+        const alertContainer = document.getElementById("alertContainer");
+        alertContainer.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        alertContainer.querySelector(".alert").style.display = "block";
+        if (type === "success")
+          setTimeout(() => (alertContainer.innerHTML = ""), 3000);
+      }
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("loginBtn");
+          btn.disabled = true;
+          const email = document.getElementById("email").value;
+          const sub = document.getElementById("sub").value;
+          const name = document.getElementById("name").value;
+
+          try {
+            const res = await fetch(
+              "https://benestjs-production.up.railway.app/auth/login",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sub, email, name, picture: "" }),
+              }
+            );
+            const data = await res.json();
+            if (data?.token?.access_token) {
+              saveToken(data.token);
+              showAlert("Đăng nhập thành công!", "success");
+              setTimeout(
+                // () => (window.location.href = "barcode.html"),
+                () => (window.location.href = "create-seat.html"),
+                1500
+              );
+            } else {
+              throw new Error(data.message || "Lỗi đăng nhập");
+            }
+          } catch (err) {
+            showAlert(err.message);
+          } finally {
+            btn.disabled = false;
+          }
+        });
+
+      window.addEventListener("load", () => {
+        const token = getAccessToken();
+        // if (token) window.location.href = "barcode.html";
+        if (token) window.location.href = "create-seat.html";
+      });
+    </script>
+  </body>
+</html>
