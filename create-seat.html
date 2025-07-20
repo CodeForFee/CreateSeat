@@ -6,12 +6,12 @@
     <title>🎟️ Tạo sơ đồ ghế 3D - Admin (Debug)</title>
     <script src="auth.js"></script>
     <style>
+      /* ... giữ nguyên toàn bộ CSS ... */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
-
       body {
         font-family: "Inter", sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -19,29 +19,24 @@
         padding: 1rem;
         color: #fff;
       }
-
       .container {
         max-width: 1200px;
         margin: 0 auto;
       }
-
       .header {
         text-align: center;
         margin-bottom: 2rem;
       }
-
       .header h1 {
         font-size: 2.5rem;
         font-weight: 700;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         margin-bottom: 0.5rem;
       }
-
       .header p {
         font-size: 1.1rem;
         opacity: 0.9;
       }
-
       .debug-panel {
         background: rgba(255, 0, 0, 0.1);
         border: 2px solid rgba(255, 0, 0, 0.3);
@@ -49,12 +44,10 @@
         border-radius: 10px;
         margin-bottom: 2rem;
       }
-
       .debug-panel h3 {
         color: #ff6b6b;
         margin-bottom: 1rem;
       }
-
       .debug-output {
         background: rgba(0, 0, 0, 0.5);
         padding: 1rem;
@@ -66,7 +59,6 @@
         overflow-y: auto;
         color: #00ff00;
       }
-
       .controls {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
@@ -80,7 +72,6 @@
         align-items: center;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       }
-
       .btn {
         padding: 0.75rem 1.5rem;
         border: none;
@@ -94,7 +85,6 @@
         position: relative;
         overflow: hidden;
       }
-
       .btn::before {
         content: "";
         position: absolute;
@@ -110,40 +100,33 @@
         );
         transition: left 0.5s;
       }
-
       .btn:hover::before {
         left: 100%;
       }
-
       .btn-primary {
         background: linear-gradient(45deg, #ff6b6b, #ee5a24);
         color: white;
         box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
       }
-
       .btn-secondary {
         background: linear-gradient(45deg, #4ecdc4, #44a08d);
         color: white;
         box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
       }
-
       .btn-danger {
         background: linear-gradient(45deg, #e74c3c, #c0392b);
         color: white;
         box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
       }
-
       .btn-debug {
         background: linear-gradient(45deg, #9b59b6, #8e44ad);
         color: white;
         box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
       }
-
       .btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       }
-
       .canvas-container {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(20px);
@@ -155,7 +138,6 @@
         position: relative;
         overflow: hidden;
       }
-
       .canvas-container::before {
         content: "";
         position: absolute;
@@ -173,7 +155,6 @@
         background-size: 20px 20px;
         pointer-events: none;
       }
-
       #seatCanvas {
         width: 100%;
         height: 500px;
@@ -184,7 +165,6 @@
         position: relative;
         overflow: hidden;
       }
-
       .seat-3d {
         position: absolute;
         width: 40px;
@@ -194,7 +174,6 @@
         cursor: move;
         animation: seatAppear 0.5s ease-out;
       }
-
       @keyframes seatAppear {
         from {
           transform: scale(0) rotateY(180deg);
@@ -205,12 +184,10 @@
           opacity: 1;
         }
       }
-
       .seat-3d:hover {
         transform: scale(1.1) rotateY(10deg);
         z-index: 10;
       }
-
       .seat-face {
         position: absolute;
         width: 40px;
@@ -223,42 +200,34 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         border-radius: 8px;
       }
-
       .seat-front {
         background: linear-gradient(135deg, #4caf50, #45a049);
         border: 2px solid #2e7d32;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       }
-
       .seat-top {
         background: linear-gradient(135deg, #66bb6a, #4caf50);
         transform: rotateX(90deg) translateZ(20px);
         border: 1px solid #2e7d32;
       }
-
       .seat-right {
         background: linear-gradient(135deg, #388e3c, #2e7d32);
         transform: rotateY(90deg) translateZ(20px);
         border: 1px solid #1b5e20;
       }
-
       .seat-selected {
         animation: pulse 1s infinite;
       }
-
       .seat-selected .seat-front {
         background: linear-gradient(135deg, #ff5722, #d84315);
         border-color: #bf360c;
       }
-
       .seat-selected .seat-top {
         background: linear-gradient(135deg, #ff7043, #ff5722);
       }
-
       .seat-selected .seat-right {
         background: linear-gradient(135deg, #d84315, #bf360c);
       }
-
       @keyframes pulse {
         0%,
         100% {
@@ -268,7 +237,6 @@
           transform: scale(1.05);
         }
       }
-
       .info-panel {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
@@ -277,13 +245,11 @@
         border-radius: 15px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       }
-
       .info-panel h3 {
         margin-bottom: 1rem;
         color: #fff;
         font-size: 1.3rem;
       }
-
       .info-item {
         display: flex;
         justify-content: space-between;
@@ -292,7 +258,6 @@
         background: rgba(255, 255, 255, 0.05);
         border-radius: 8px;
       }
-
       .instructions {
         background: rgba(255, 255, 255, 0.1);
         padding: 1rem;
@@ -300,16 +265,13 @@
         margin-bottom: 1rem;
         border-left: 4px solid #4caf50;
       }
-
       .instructions ul {
         margin-left: 1rem;
       }
-
       .instructions li {
         margin-bottom: 0.5rem;
         opacity: 0.9;
       }
-
       .drag-hint {
         position: absolute;
         top: 50%;
@@ -320,18 +282,15 @@
         pointer-events: none;
         text-align: center;
       }
-
       @media (max-width: 768px) {
         .controls {
           flex-direction: column;
           align-items: stretch;
         }
-
         .btn {
           width: 100%;
           margin-bottom: 0.5rem;
         }
-
         #seatCanvas {
           height: 400px;
         }
@@ -344,7 +303,6 @@
         <h1>🎟️ Tạo sơ đồ ghế 3D (Debug Mode)</h1>
         <p>Kéo thả để tạo ghế một cách trực quan - Phiên bản debug</p>
       </div>
-
       <div class="debug-panel">
         <h3>🐛 Debug Console</h3>
         <div id="debugOutput" class="debug-output">
@@ -354,7 +312,6 @@
           🧹 Clear Debug Log
         </button>
       </div>
-
       <div class="instructions">
         <h3>📝 Hướng dẫn sử dụng:</h3>
         <ul>
@@ -370,8 +327,9 @@
           </li>
         </ul>
       </div>
-
       <div class="controls">
+        <input type="number" id="cinemaRoomId" placeholder="Cinema Room ID" min="1" style="width: 120px;" />
+        <input type="number" id="seatTypeId" placeholder="Seat Type ID" min="1" style="width: 120px;" />
         <button class="btn btn-secondary" onclick="clearSelected()">
           🗑️ Xóa ghế đã chọn
         </button>
@@ -389,7 +347,6 @@
         </button>
         <button class="btn btn-danger" onclick="logout()">🚪 Đăng xuất</button>
       </div>
-
       <div class="canvas-container">
         <div id="seatCanvas">
           <div class="drag-hint">
@@ -400,7 +357,6 @@
           </div>
         </div>
       </div>
-
       <div class="info-panel">
         <h3>📊 Thông tin sơ đồ</h3>
         <div class="info-item">
@@ -421,12 +377,8 @@
         </div>
       </div>
     </div>
-
     <script>
-      // Enforce login before using the page
       requireLogin();
-
-      // Seat management
       let seats = [];
       let selectedSeats = new Set();
       let isDragging = false;
@@ -434,31 +386,22 @@
       const SEAT_SIZE = 40;
       const SEAT_SPACING = 50;
       let seatCounter = 1;
-
       const canvas = document.getElementById("seatCanvas");
       const debugOutput = document.getElementById("debugOutput");
-
-      // Debug logging function
       function debugLog(message, type = "info") {
         const timestamp = new Date().toLocaleTimeString();
         const logEntry = `[${timestamp}] ${type.toUpperCase()}: ${message}\n`;
         debugOutput.textContent += logEntry;
         debugOutput.scrollTop = debugOutput.scrollHeight;
-
-        // Also log to console
         console.log(`🐛 ${logEntry.trim()}`);
       }
-
       function clearDebugLog() {
         debugOutput.textContent = "Debug log cleared...\n";
       }
-
-      // Mouse events for drag to create seats
       canvas.addEventListener("mousedown", startDrag);
       canvas.addEventListener("mousemove", handleDrag);
       canvas.addEventListener("mouseup", endDrag);
       canvas.addEventListener("mouseleave", endDrag);
-
       function startDrag(e) {
         if (e.target === canvas) {
           isDragging = true;
@@ -468,29 +411,23 @@
           debugLog(`Started drag at (${dragStartX}, ${dragStartY})`);
         }
       }
-
       function handleDrag(e) {
         if (!isDragging) return;
-
         const rect = canvas.getBoundingClientRect();
         const currentX = e.clientX - rect.left;
         const currentY = e.clientY - rect.top;
-
         const minX = Math.min(dragStartX, currentX);
         const maxX = Math.max(dragStartX, currentX);
         const minY = Math.min(dragStartY, currentY);
         const maxY = Math.max(dragStartY, currentY);
-
         const startCol = Math.floor(minX / SEAT_SPACING);
         const endCol = Math.floor(maxX / SEAT_SPACING);
         const startRow = Math.floor(minY / SEAT_SPACING);
         const endRow = Math.floor(maxY / SEAT_SPACING);
-
         for (let row = startRow; row <= endRow; row++) {
           for (let col = startCol; col <= endCol; col++) {
             const x = col * SEAT_SPACING + 10;
             const y = row * SEAT_SPACING + 10;
-
             if (
               !seatExistsAt(x, y) &&
               x >= 0 &&
@@ -503,7 +440,6 @@
           }
         }
       }
-
       function endDrag() {
         if (isDragging) {
           debugLog(`Ended drag, created ${seats.length} total seats`);
@@ -511,14 +447,12 @@
         isDragging = false;
         updateStats();
       }
-
       function seatExistsAt(x, y) {
         return seats.some(
           (seat) =>
             Math.abs(seat.x - x) < SEAT_SIZE && Math.abs(seat.y - y) < SEAT_SIZE
         );
       }
-
       function createSeat(x, y, row, col) {
         const seatId = `seat_${seatCounter++}`;
         const seat = {
@@ -529,34 +463,27 @@
           col: col,
           selected: false,
         };
-
         seats.push(seat);
         debugLog(`Created seat ${seatId} at row ${row}, col ${col}`);
-
         const seatElement = document.createElement("div");
         seatElement.className = "seat-3d";
         seatElement.id = seatId;
         seatElement.style.left = x + "px";
         seatElement.style.top = y + "px";
-
         seatElement.innerHTML = `
           <div class="seat-face seat-front">${col}</div>
           <div class="seat-face seat-top"></div>
           <div class="seat-face seat-right"></div>
         `;
-
         seatElement.addEventListener("click", (e) => {
           e.stopPropagation();
           toggleSeatSelection(seatId);
         });
-
         canvas.appendChild(seatElement);
       }
-
       function toggleSeatSelection(seatId) {
         const seat = seats.find((s) => s.id === seatId);
         const seatElement = document.getElementById(seatId);
-
         if (seat.selected) {
           seat.selected = false;
           selectedSeats.delete(seatId);
@@ -568,18 +495,14 @@
           seatElement.classList.add("seat-selected");
           debugLog(`Selected seat ${seatId}`);
         }
-
         updateStats();
       }
-
       function clearSelected() {
         if (selectedSeats.size === 0) {
           alert("Không có ghế nào được chọn!");
           return;
         }
-
         debugLog(`Clearing ${selectedSeats.size} selected seats`);
-
         selectedSeats.forEach((seatId) => {
           const seatElement = document.getElementById(seatId);
           if (seatElement) {
@@ -590,20 +513,16 @@
           }
           seats = seats.filter((s) => s.id !== seatId);
         });
-
         selectedSeats.clear();
         updateStats();
       }
-
       function clearAll() {
         if (seats.length === 0) {
           alert("Không có ghế nào để xóa!");
           return;
         }
-
         if (confirm("Bạn có chắc chắn muốn xóa tất cả ghế?")) {
           debugLog(`Clearing all ${seats.length} seats`);
-
           seats.forEach((seat) => {
             const seatElement = document.getElementById(seat.id);
             if (seatElement) {
@@ -615,7 +534,6 @@
               }, 300);
             }
           });
-
           setTimeout(() => {
             seats = [];
             selectedSeats.clear();
@@ -625,57 +543,67 @@
           }, 300);
         }
       }
-
       function updateStats() {
         document.getElementById("totalSeats").textContent = seats.length;
         document.getElementById("selectedSeats").textContent =
           selectedSeats.size;
-
         const rows =
           seats.length > 0 ? Math.max(...seats.map((s) => s.row)) : 0;
         const cols =
           seats.length > 0 ? Math.max(...seats.map((s) => s.col)) : 0;
-
         document.getElementById("totalRows").textContent = rows;
         document.getElementById("maxCols").textContent = cols;
       }
-
+      function getSeatIds() {
+        return seats.map(s => {
+          const rowChar = String.fromCharCode(64 + s.row); // 1 -> 'A'
+          return `${rowChar}${s.col}`;
+        });
+      }
+      function getRequestData() {
+        const seatTypeId = parseInt(document.getElementById("seatTypeId").value) || 1;
+        const cinemaRoomId = document.getElementById("cinemaRoomId").value || "1";
+        return {
+          sections: [
+            {
+              seat_type_id: seatTypeId,
+              seat_rows: Math.max(...seats.map((s) => s.row)),
+              seat_ids: getSeatIds()
+            }
+          ],
+          seat_column: Math.max(...seats.map((s) => s.col)),
+          cinema_room_id: cinemaRoomId
+        };
+      }
       function testPayload() {
         if (seats.length === 0) {
           alert("Tạo ít nhất 1 ghế để test payload!");
           return;
         }
-
-        // Create the CORRECT payload format that matches your backend
-        const requestData = {
-          seat_rows: Math.max(...seats.map((s) => s.row)),
-          seat_column: Math.max(...seats.map((s) => s.col)),
-          seat_type_id: 1, // Default seat type ID
-        };
-
+        const requestData = getRequestData();
         debugLog("=== TEST PAYLOAD ===");
         debugLog(`Request Data: ${JSON.stringify(requestData, null, 2)}`);
         debugLog("=== PAYLOAD STRUCTURE ANALYSIS ===");
-        debugLog(`✅ seat_rows: ${requestData.seat_rows} (number)`);
+        debugLog(`✅ sections: ${JSON.stringify(requestData.sections)}`);
         debugLog(`✅ seat_column: ${requestData.seat_column} (number)`);
-        debugLog(`✅ seat_type_id: ${requestData.seat_type_id} (number)`);
+        debugLog(`✅ cinema_room_id: ${requestData.cinema_room_id} (string)`);
         debugLog("=== END TEST PAYLOAD ===");
-
-        // Validation checks
         const validationErrors = [];
-
-        if (!requestData.seat_rows || requestData.seat_rows <= 0) {
+        if (!requestData.sections[0].seat_type_id || requestData.sections[0].seat_type_id <= 0) {
+          validationErrors.push("seat_type_id must be positive");
+        }
+        if (!requestData.sections[0].seat_rows || requestData.sections[0].seat_rows <= 0) {
           validationErrors.push("seat_rows must be positive");
         }
-
         if (!requestData.seat_column || requestData.seat_column <= 0) {
           validationErrors.push("seat_column must be positive");
         }
-
-        if (!requestData.seat_type_id || requestData.seat_type_id <= 0) {
-          validationErrors.push("seat_type_id must be positive");
+        if (!requestData.cinema_room_id) {
+          validationErrors.push("cinema_room_id is required");
         }
-
+        if (!requestData.sections[0].seat_ids || requestData.sections[0].seat_ids.length === 0) {
+          validationErrors.push("seat_ids must not be empty");
+        }
         if (validationErrors.length > 0) {
           debugLog("=== VALIDATION ERRORS ===", "error");
           validationErrors.forEach((error) => debugLog(error, "error"));
@@ -688,13 +616,11 @@
           );
         }
       }
-
       async function saveLayout() {
         if (seats.length === 0) {
           alert("Không có ghế nào để lưu!");
           return;
         }
-
         try {
           const token = getAccessToken();
           debugLog(
@@ -702,35 +628,21 @@
               token ? `${token.substring(0, 20)}...` : "No token"
             }`
           );
-
           if (!token || token === "demo_token_123") {
             debugLog("Token invalid or demo token", "warn");
             alert(
               "⚠️ Token không hợp lệ hoặc đang dùng demo token!\nVui lòng đăng nhập lại để lấy token thực."
             );
-
-            // Show what WOULD be sent in demo mode
-            const demoData = {
-              seat_rows: Math.max(...seats.map((s) => s.row)),
-              seat_column: Math.max(...seats.map((s) => s.col)),
-              seat_type_id: 1,
-            };
+            const demoData = getRequestData();
             debugLog(`DEMO - Would send: ${JSON.stringify(demoData, null, 2)}`);
             alert(
-              `✅ [DEMO MODE] Sẽ tạo ${demoData.seat_rows}x${
+              `✅ [DEMO MODE] Sẽ tạo ${demoData.sections[0].seat_rows}x${
                 demoData.seat_column
-              } = ${demoData.seat_rows * demoData.seat_column} ghế!`
+              } = ${demoData.sections[0].seat_rows * demoData.seat_column} ghế!`
             );
             return;
           }
-
-          // Create the CORRECT payload format that matches your BulkCreateSeatDto
-          const requestData = {
-            seat_rows: Math.max(...seats.map((s) => s.row)),
-            seat_column: Math.max(...seats.map((s) => s.col)),
-            seat_type_id: 1, // Default seat type ID, can be made configurable
-          };
-
+          const requestData = getRequestData();
           debugLog("=== SAVE REQUEST ===");
           debugLog(`URL: https://benestjs-production.up.railway.app/seat/bulk`);
           debugLog(`Method: POST`);
@@ -741,7 +653,6 @@
             )}...`
           );
           debugLog(`Request Data: ${JSON.stringify(requestData, null, 2)}`);
-
           const response = await fetch(
             "https://benestjs-production.up.railway.app/seat/bulk",
             {
@@ -753,21 +664,12 @@
               body: JSON.stringify(requestData),
             }
           );
-          console.log("📥 Response status:", response.status);
-          console.log(
-            "📥 Response headers:",
-            Object.fromEntries(response.headers.entries())
-          );
-
           const data = await response.json();
-          console.log("📥 Response data:", data);
-
           if (response.ok) {
-            alert(`✅ Lưu thành công ${data.total || seats.length} ghế!`);
+            alert(`✅ Lưu thành công!`);
             console.log("✅ Save successful");
           } else {
             console.error("❌ API Error:", data);
-
             if (response.status === 401) {
               alert(
                 "🔐 Lỗi xác thực (401):\n" +
@@ -776,7 +678,6 @@
                   "Chi tiết: " +
                   (data.message || "Unauthorized")
               );
-              // Force redirect to login
               window.location.href = "index.html";
               return;
             } else if (response.status === 403) {
@@ -801,7 +702,6 @@
           }
         } catch (error) {
           console.error("💥 Network/Request Error:", error);
-
           if (error.name === "TypeError" && error.message.includes("fetch")) {
             alert(
               "🌐 Lỗi kết nối:\n" +
@@ -816,56 +716,7 @@
           }
         }
       }
-
-      // Force logout and clear session
-      async function forceLogout() {
-        console.log("🔄 Force logout - clearing all data immediately");
-
-        // Clear all storage
-        localStorage.clear();
-        sessionStorage.clear();
-
-        // Clear cookies
-        document.cookie.split(";").forEach(function (c) {
-          document.cookie = c
-            .replace(/^ +/, "")
-            .replace(
-              /=.*/,
-              "=;expires=" + new Date().toUTCString() + ";path=/"
-            );
-        });
-
-        console.log("🧹 All storage and cookies cleared");
-
-        // Redirect immediately
-        window.location.href = "index.html";
-      }
-
-      function convertSeatsToLayout() {
-        if (seats.length === 0) return [];
-
-        const maxRow = Math.max(...seats.map((s) => s.row));
-        const layout = [];
-
-        for (let row = 1; row <= maxRow; row++) {
-          const rowSeats = seats
-            .filter((s) => s.row === row)
-            .sort((a, b) => a.col - b.col)
-            .map((s) => ({
-              seat_row: s.row,
-              seat_column: s.col,
-              x: s.x,
-              y: s.y,
-            }));
-
-          if (rowSeats.length > 0) {
-            layout.push(rowSeats);
-          }
-        }
-
-        return layout;
-      }
-
+      // ... các hàm khác giữ nguyên ...
       function checkAuth() {
         const token = getAccessToken();
         const tokenInfo = token
@@ -876,7 +727,6 @@
               storage: getTokenStorageLocation(),
             }
           : null;
-
         if (tokenInfo) {
           const status = tokenInfo.isDemo ? "⚠️ DEMO MODE" : "✅ REAL TOKEN";
           alert(
@@ -890,7 +740,6 @@
           alert("❌ Không tìm thấy token!\nVui lòng đăng nhập.");
         }
       }
-
       function getTokenStorageLocation() {
         if (localStorage.getItem("access_token"))
           return "localStorage.access_token";
@@ -902,11 +751,7 @@
           return "localStorage.demo_token";
         return "demo_fallback";
       }
-
-      // Initialize auth check
       updateStats();
-
-      // Hide drag hint after first interaction
       canvas.addEventListener("mousedown", function hideHint() {
         const hint = document.querySelector(".drag-hint");
         if (hint) {
@@ -922,3 +767,6 @@
     </script>
   </body>
 </html>
+
+
+
